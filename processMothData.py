@@ -126,6 +126,17 @@ def plotStimulus(stimulus, fs, fullWAV):
     ax.plot(fullWAV)
     for time in stimulus.timestamps:
         ax.plot([int(time * fs), int(time * fs)], [-10000, 10000], color = 'r')
+        
+    bottomLim, topLim = ax.get_xlim()
+    labels = []
+    locs = []
+    whitespace = 0 - bottomLim
+    for i in range(len(fullWAV)//5000//100 + 1):
+        labels.append(100 * i)
+        locs.append((bottomLim + whitespace) + (fs* 100 * i))
+        
+    plt.xticks(locs, labels)
+    plt.xlabel('Secounds')
     
     mins = []
     fig = plt.figure()
