@@ -121,6 +121,8 @@ def plotStimulus(stimulus, fs, fullWAV):
     ----------
     mins: list of mini
     """
+    
+    SECONDS_TO_CHECK_FOR_MINS = 3;
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
     ax.plot(fullWAV)
@@ -156,8 +158,8 @@ def plotStimulus(stimulus, fs, fullWAV):
             duration.append(int((stimulus.timestamps[rawIndex] + 4) * fs) + int(start - 1.5 * fs))
             duration.append(int((stimulus.timestamps[rawIndex] + 4) * fs) + int(start + 5.5 * fs))
             ax1.plot((np.array(list(map(list, zip(*stimulus.rawSignal[rawIndex])))[0][int(start - 1.5 * fs):int(start + 5.5 * fs)]) - stimulus.baseline[rawIndex]), color = 'c')
-            mins.append((np.array(list(map(list, zip(*stimulus.rawSignal[rawIndex])))[0][int(start - 1.5 * fs):int(start + 1.5 * fs)]) - stimulus.baseline[rawIndex]).min())
-            y.append(np.where(abs((np.array(list(map(list, zip(*stimulus.rawSignal[rawIndex])))[0][int(start - 1.5 * fs):int(start + 1.5 * fs)]) - stimulus.baseline[rawIndex]) - mins[-1]) < .0001)[0][0])
+            mins.append((np.array(list(map(list, zip(*stimulus.rawSignal[rawIndex])))[0][int(start - 1.5 * fs):int(start + (SECONDS_TO_CHECK_FOR_MINS - 1.5) * fs)]) - stimulus.baseline[rawIndex]).min())
+            y.append(np.where(abs((np.array(list(map(list, zip(*stimulus.rawSignal[rawIndex])))[0][int(start - 1.5 * fs):int(start + (SECONDS_TO_CHECK_FOR_MINS - 1.5) * fs)]) - stimulus.baseline[rawIndex]) - mins[-1]) < .0001)[0][0])
                    
             if rawIndex == 0:
                 aveLine = np.array(list(map(list, zip(*stimulus.rawSignal[rawIndex])))[0][int(start - 1.5 * fs):int(start + 5.5 * fs)]) - stimulus.baseline[rawIndex]
