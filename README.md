@@ -15,3 +15,5 @@ Inorder to use processMothData one must call recording passing a list of the dir
 
 wavfile_read.py was taken from another gitHub. link: https://github.com/scipy/scipy/blob/v0.14.0/scipy/io/wavfile.py#L116
 Module to read / write wav files using numpy arrays
+
+spikerecorder.py is written in Python 3 and it will read, parse and display data from BackyardBrains' serial devices (like Muscle, Neuron and Plant SpikerShield and Muscle and Plant SpikerBox)
